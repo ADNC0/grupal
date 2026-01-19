@@ -1,15 +1,15 @@
 class MateriaModels {
   int? id_materia;
   String nombre;
-  String? docente;
-  String? estado;
+  String docente;
+  String estado;
  
   // Constructor
   MateriaModels({
     this.id_materia,
     required this.nombre, 
-    this.docente,
-    this.estado,
+    required this.docente,
+    required this.estado,
   });
 
   // Convertir de map a clase (SELECT)
