@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../models/multa_models.dart';
+import '../../models/estudiante_models.dart';
+import '../../models/materia_models.dart';
+import '../../models/tipo_multa_models.dart';
+
 import '../../repositories/multa_repository.dart';
+import '../../repositories/estudiante_repository.dart';
+import '../../repositories/materia_repository.dart';
+import '../../repositories/tipo_multa_repository.dart';
 
 class MultaFormScreen extends StatefulWidget {
   const MultaFormScreen({super.key});
@@ -12,13 +19,32 @@ class MultaFormScreen extends StatefulWidget {
 
 class _MultaFormScreenState extends State<MultaFormScreen> {
   final formKey = GlobalKey<FormState>();
+
   final fechaController = TextEditingController();
   final valorController = TextEditingController();
-  final idEstudianteController = TextEditingController();
-  final idMateriaController = TextEditingController();
-  final idTipoController = TextEditingController();
+
+  int? estudianteId;
+  int? materiaId;
+  int? tipoId;
+
+  List<EstudianteModels> estudiantes = [];
+  List<MateriaModels> materias = [];
+  List<TipoMultaModels> tipos = [];
 
   MultaModels? multa;
+
+  @override
+  void initState() {
+    super.initState();
+    cargarCombos();
+  }
+
+  Future<void> cargarCombos() async {
+    estudiantes = await EstudianteRepository().getAll();
+    materias = await MateriaRepository().getAll();
+    tipos = await TipoMultaRepository().getAll();
+    setState(() {});
+  }
 
   @override
   void didChangeDependencies() {
@@ -29,9 +55,9 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
       multa = args as MultaModels;
       fechaController.text = multa!.fecha;
       valorController.text = multa!.valor;
-      idEstudianteController.text = multa!.id_estudiante.toString();
-      idMateriaController.text = multa!.id_materia.toString();
-      idTipoController.text = multa!.id_tipo.toString();
+      estudianteId = multa!.id_estudiante;
+      materiaId = multa!.id_materia;
+      tipoId = multa!.id_tipo;
     }
   }
 
@@ -51,56 +77,57 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
             children: [
               TextFormField(
                 controller: fechaController,
-                decoration: const InputDecoration(
-                  labelText: 'Fecha',
-                  hintText: 'YYYY-MM-DD',
-                ),
-                validator: (v) =>
-                    v == null || v.isEmpty ? 'Ingrese la fecha' : null,
+                decoration: const InputDecoration(labelText: 'Fecha'),
+                validator: (v) => v == null || v.isEmpty ? 'Ingrese la fecha' : null,
               ),
               const SizedBox(height: 15),
 
               TextFormField(
                 controller: valorController,
-                decoration: const InputDecoration(
-                  labelText: 'Valor',
-                  hintText: 'Ej: 5',
-                ),
-                validator: (v) =>
-                    v == null || v.isEmpty ? 'Ingrese el valor' : null,
+                decoration: const InputDecoration(labelText: 'Valor'),
+                validator: (v) => v == null || v.isEmpty ? 'Ingrese el valor' : null,
               ),
               const SizedBox(height: 15),
 
-              TextFormField(
-                controller: idEstudianteController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'ID Estudiante',
-                ),
-                validator: (v) =>
-                    v == null || v.isEmpty ? 'Ingrese el id del estudiante' : null,
+              DropdownButtonFormField<int>(
+                value: estudianteId,
+                items: estudiantes
+                    .map((e) => DropdownMenuItem(
+                          value: e.id_estudiante, 
+                          child: Text(e.nombre),
+                        ))
+                    .toList(),
+                onChanged: (v) => estudianteId = v,
+                validator: (v) => v == null ? 'Seleccione estudiante' : null,
+                decoration: const InputDecoration(labelText: 'Estudiante'),
               ),
               const SizedBox(height: 15),
 
-              TextFormField(
-                controller: idMateriaController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'ID Materia',
-                ),
-                validator: (v) =>
-                    v == null || v.isEmpty ? 'Ingrese el id de la materia' : null,
+              DropdownButtonFormField<int>(
+                value: materiaId,
+                items: materias
+                    .map((e) => DropdownMenuItem(
+                          value: e.id_materia,
+                          child: Text(e.nombre),
+                        ))
+                    .toList(),
+                onChanged: (v) => materiaId = v,
+                validator: (v) => v == null ? 'Seleccione materia' : null,
+                decoration: const InputDecoration(labelText: 'Materia'),
               ),
               const SizedBox(height: 15),
 
-              TextFormField(
-                controller: idTipoController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'ID Tipo Multa',
-                ),
-                validator: (v) =>
-                    v == null || v.isEmpty ? 'Ingrese el id del tipo' : null,
+              DropdownButtonFormField<int>(
+                value: tipoId,
+                items: tipos
+                    .map((e) => DropdownMenuItem(
+                          value: e.id_tipo,
+                          child: Text(e.descripcion),
+                        ))
+                    .toList(),
+                onChanged: (v) => tipoId = v,
+                validator: (v) => v == null ? 'Seleccione tipo multa' : null,
+                decoration: const InputDecoration(labelText: 'Tipo Multa'),
               ),
               const SizedBox(height: 25),
 
@@ -111,16 +138,15 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
                       onPressed: () async {
                         if (!formKey.currentState!.validate()) return;
 
-                        final repo = MultaRepository();
-
                         final multaForm = MultaModels(
                           fecha: fechaController.text,
                           valor: valorController.text,
-                          id_estudiante:
-                              int.parse(idEstudianteController.text),
-                          id_materia: int.parse(idMateriaController.text),
-                          id_tipo: int.parse(idTipoController.text),
+                          id_estudiante: estudianteId!,
+                          id_materia: materiaId!,
+                          id_tipo: tipoId!,
                         );
+
+                        final repo = MultaRepository();
 
                         if (esEditar) {
                           multaForm.id_multa = multa!.id_multa;

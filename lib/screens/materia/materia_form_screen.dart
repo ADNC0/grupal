@@ -72,7 +72,7 @@ class _MateriaFormScreenState extends State<MateriaFormScreen> {
                 decoration: InputDecoration(
                   labelText: "Docente",
                   hintText: "Ingrese el nombre del docente",
-                  prefixIcon: Icon(Icons.abc),
+                  prefixIcon: Icon(Icons.person),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),

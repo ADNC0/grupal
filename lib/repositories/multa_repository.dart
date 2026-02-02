@@ -32,12 +32,14 @@ class MultaRepository {
     );
   }
 
-  // listar multas
+  //listar multas
   Future<List<MultaModels>> getAll() async {
-    final db = await database.db;
-    final response = await db.query(tableName);
-    return response
-        .map((e) => MultaModels.fromMap(e))
-        .toList();
+  final db = await database.db;
+  final response = await db.query(tableName);
+  return response
+  .map((e) => MultaModels.fromMap(e))
+  .toList();
   }
+
+
 }
