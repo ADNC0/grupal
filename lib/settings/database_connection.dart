@@ -63,6 +63,7 @@ class DatabaseConnection {
             fecha TEXT,
             valor TEXT,
             id_estudiante INTEGER,
+            nombre_estudiante TEXT,
             id_materia INTEGER,
             id_tipo INTEGER
           )

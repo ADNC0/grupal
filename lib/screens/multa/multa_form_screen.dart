@@ -24,6 +24,7 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
   final valorController = TextEditingController();
 
   int? estudianteId;
+  String? nombreEstudiante;
   int? materiaId;
   int? tipoId;
 
@@ -56,6 +57,7 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
       fechaController.text = multa!.fecha;
       valorController.text = multa!.valor;
       estudianteId = multa!.id_estudiante;
+      nombreEstudiante = multa!.nombre_estudiante;
       materiaId = multa!.id_materia;
       tipoId = multa!.id_tipo;
     }
@@ -157,6 +159,7 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
                           fecha: fechaController.text,
                           valor: valorController.text,
                           id_estudiante: estudianteId!,
+                          nombre_estudiante: nombreEstudiante!,
                           id_materia: materiaId!,
                           id_tipo: tipoId!,
                         );

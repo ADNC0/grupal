@@ -3,6 +3,7 @@ class MultaModels {
   String fecha;
   String valor;
   int id_estudiante;
+  String nombre_estudiante;
   int id_materia;
   int id_tipo;
 
@@ -12,6 +13,7 @@ class MultaModels {
     required this.fecha,
     required this.valor,
     required this.id_estudiante,
+    required this.nombre_estudiante,
     required this.id_materia,
     required this.id_tipo,
   });
@@ -23,6 +25,7 @@ class MultaModels {
       fecha: data["fecha"],
       valor: data["valor"],
       id_estudiante: data["id_estudiante"],
+      nombre_estudiante: data["nombre_estudiante"],
       id_materia: data["id_materia"],
       id_tipo: data["id_tipo"],
     );
@@ -35,6 +38,7 @@ class MultaModels {
       "fecha": fecha,
       "valor": valor,
       "id_estudiante": id_estudiante,
+      "nombre_estudiante": nombre_estudiante,
       "id_materia": id_materia,
       "id_tipo": id_tipo,
     };
