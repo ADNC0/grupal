@@ -64,7 +64,7 @@ class _TipoMultaScreenState extends State<TipoMultaScreen> {
                 return Card(
                   child: ListTile(
                     title: Text(tipoMulta.descripcion),
-                    subtitle: Text(tipoMulta.gravedad),
+                    subtitle: Text('${tipoMulta.gravedad} - ${tipoMulta.estado}'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
