@@ -139,6 +139,7 @@ class HomeScreen extends StatelessWidget {
               Text("y se muestran mediante un filtrado de registros asociados a dicho estudiante."),
               SizedBox(height: 5),
               Text("Desarrollado por: Abraham Nacimba"),
+              Text(" Jonathan Alay "),
             ],
           ),
           actions: [

@@ -63,8 +63,8 @@ class _EstudianteScreenState extends State<EstudianteScreen> {
                 final estudiante = estudiantes[i];
                 return Card(
                   child: ListTile(
-                    title: Text(estudiante.nombre),
-                    subtitle: Text(estudiante.curso),
+                    title: Text('${estudiante.nombre} ${estudiante.apellido}'),
+                    subtitle: Text('${estudiante.curso} - ${estudiante.paralelo} - ${estudiante.cedula}'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
