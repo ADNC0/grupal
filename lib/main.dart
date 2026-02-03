@@ -8,6 +8,7 @@ import 'screens/tipo_multa/tipo_multa_form_screen.dart';
 import 'screens/tipo_multa/tipo_multa_screen.dart';
 import 'screens/materia/materia_form_screen.dart';
 import 'screens/materia/materia_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       routes: {
-        '/': (context) => MultaScreen(),
+        '/': (context) => HomeScreen(),
 
         '/multa': (context) => MultaScreen(),
         '/multa/form': (context) => MultaFormScreen(),
