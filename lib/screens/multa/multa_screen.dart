@@ -69,8 +69,8 @@ class _MultaScreenState extends State<MultaScreen> {
                     return Card(
                       child: ListTile(
                         title: Text(multa.fecha),
-                        leading: Text('${multa.id_estudiante} - ${multa.nombre_estudiante}'),
                         subtitle: Text(multa.valor),
+                        leading: Text(multa.id_estudiante.toString()),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [

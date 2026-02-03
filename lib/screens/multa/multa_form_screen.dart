@@ -22,11 +22,9 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
 
   final fechaController = TextEditingController();
   final valorController = TextEditingController();
-
-  int? estudianteId;
-  String? nombreEstudiante;
-  int? materiaId;
-  int? tipoId;
+  int? id_estudiante;
+  int? id_materia;
+  int? id_tipo;
 
   List<EstudianteModels> estudiantes = [];
   List<MateriaModels> materias = [];
@@ -56,10 +54,9 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
       multa = args as MultaModels;
       fechaController.text = multa!.fecha;
       valorController.text = multa!.valor;
-      estudianteId = multa!.id_estudiante;
-      nombreEstudiante = multa!.nombre_estudiante;
-      materiaId = multa!.id_materia;
-      tipoId = multa!.id_tipo;
+      id_estudiante = multa!.id_estudiante;
+      id_materia = multa!.id_materia;
+      id_tipo = multa!.id_tipo;
     }
   }
 
@@ -77,75 +74,90 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
           key: formKey,
           child: ListView(
             children: [
-             TextFormField(
-              controller: fechaController,
-              readOnly: true,
-              decoration: const InputDecoration(
-                labelText: 'Fecha',
-                suffixIcon: Icon(Icons.calendar_today),
+              // FECHA
+              TextFormField(
+                controller: fechaController,
+                readOnly: true,
+                decoration: const InputDecoration(
+                  labelText: 'Fecha',
+                  suffixIcon: Icon(Icons.calendar_today),
+                ),
+                onTap: () async {
+                  DateTime? fecha = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2020),
+                    lastDate: DateTime(2030),
+                  );
+                  if (fecha != null) {
+                    fechaController.text =
+                        '${fecha.day}/${fecha.month}/${fecha.year}';
+                  }
+                },
+                validator: (v) =>
+                    v == null || v.isEmpty ? 'Ingrese la fecha' : null,
               ),
-              onTap: () async {
-                DateTime? fecha = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2025),
-                  lastDate: DateTime(2030),
-                );
-                if (fecha != null) {
-                  fechaController.text =
-                      "${fecha.day}/${fecha.month}/${fecha.year}";
-                }
-              },
-              validator: (v) => v == null || v.isEmpty ? 'Ingrese la fecha' : null,
-            ),
+
               const SizedBox(height: 15),
+
+              // VALOR
               TextFormField(
                 controller: valorController,
                 decoration: const InputDecoration(labelText: 'Valor'),
-                validator: (v) => v == null || v.isEmpty ? 'Ingrese el valor' : null,
+                validator: (v) =>
+                    v == null || v.isEmpty ? 'Ingrese el valor' : null,
               ),
-              const SizedBox(height: 15),
 
+              const SizedBox(height: 15),
               DropdownButtonFormField<int>(
-                value: estudianteId,
-                items: estudiantes
-                    .map((e) => DropdownMenuItem(
-                          value: e.id_estudiante, 
-                          child: Text(e.nombre),
-                        ))
-                    .toList(),
-                onChanged: (v) => estudianteId = v,
-                validator: (v) => v == null ? 'Seleccione estudiante' : null,
+                value: id_estudiante,
+                items: estudiantes.map((e) {
+                  return DropdownMenuItem(
+                    value: e.id_estudiante,
+                    child: Text(e.nombre),
+                  );
+                }).toList(),
+                onChanged: (v) {
+                  id_estudiante = v;
+                },
+                validator: (v) =>
+                    v == null ? 'Seleccione estudiante' : null,
                 decoration: const InputDecoration(labelText: 'Estudiante'),
               ),
-              const SizedBox(height: 15),
 
+              const SizedBox(height: 15),
               DropdownButtonFormField<int>(
-                value: materiaId,
-                items: materias
-                    .map((e) => DropdownMenuItem(
-                          value: e.id_materia,
-                          child: Text(e.nombre),
-                        ))
-                    .toList(),
-                onChanged: (v) => materiaId = v,
-                validator: (v) => v == null ? 'Seleccione materia' : null,
+                value: id_materia,
+                items: materias.map((e) {
+                  return DropdownMenuItem(
+                    value: e.id_materia,
+                    child: Text(e.nombre),
+                  );
+                }).toList(),
+                onChanged: (v) {
+                  id_materia = v;
+                },
+                validator: (v) =>
+                    v == null ? 'Seleccione materia' : null,
                 decoration: const InputDecoration(labelText: 'Materia'),
               ),
               const SizedBox(height: 15),
-
               DropdownButtonFormField<int>(
-                value: tipoId,
-                items: tipos
-                    .map((e) => DropdownMenuItem(
-                          value: e.id_tipo,
-                          child: Text(e.descripcion),
-                        ))
-                    .toList(),
-                onChanged: (v) => tipoId = v,
-                validator: (v) => v == null ? 'Seleccione tipo multa' : null,
+                value: id_tipo,
+                items: tipos.map((e) {
+                  return DropdownMenuItem(
+                    value: e.id_tipo,
+                    child: Text(e.descripcion),
+                  );
+                }).toList(),
+                onChanged: (v) {
+                  id_tipo = v;
+                },
+                validator: (v) =>
+                    v == null ? 'Seleccione tipo multa' : null,
                 decoration: const InputDecoration(labelText: 'Tipo Multa'),
               ),
+
               const SizedBox(height: 25),
 
               Row(
@@ -158,10 +170,9 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
                         final multaForm = MultaModels(
                           fecha: fechaController.text,
                           valor: valorController.text,
-                          id_estudiante: estudianteId!,
-                          nombre_estudiante: nombreEstudiante!,
-                          id_materia: materiaId!,
-                          id_tipo: tipoId!,
+                          id_estudiante: id_estudiante!,
+                          id_materia: id_materia!,
+                          id_tipo: id_tipo!,
                         );
 
                         final repo = MultaRepository();
