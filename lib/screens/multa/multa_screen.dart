@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../models/estudiante_models.dart';
+import '../../models/materia_models.dart';
 import '../../models/multa_models.dart';
+import '../../models/tipo_multa_models.dart';
+import '../../repositories/estudiante_repository.dart';
+import '../../repositories/materia_repository.dart';
 import '../../repositories/multa_repository.dart';
+import '../../repositories/tipo_multa_repository.dart';
 
 class MultaScreen extends StatefulWidget {
   const MultaScreen({super.key});
@@ -14,6 +20,10 @@ class _MultaScreenState extends State<MultaScreen> {
   final MultaRepository repo = MultaRepository();
 
   List<MultaModels> multas = [];
+  List<EstudianteModels> estudiantes = [];
+  List<MateriaModels> materias = [];
+  List<TipoMultaModels> tipos = [];
+
   bool cargando = true;
 
   @override
@@ -22,11 +32,46 @@ class _MultaScreenState extends State<MultaScreen> {
     cargarMultas();
   }
 
-  Future<void> cargarMultas() async {
-    setState(() => cargando = true);
-    multas = await repo.getAll();
-    setState(() => cargando = false);
+Future<void> cargarMultas() async {
+  setState(() => cargando = true);
+
+  multas = await repo.getAll();
+  estudiantes = await EstudianteRepository().getAll();
+  materias = await MateriaRepository().getAll();
+  tipos = await TipoMultaRepository().getAll();
+
+  setState(() => cargando = false);
+}
+
+String obtenerNombreEstudiante(int id) {
+  for (final e in estudiantes) {
+    if (e.id_estudiante == id) {
+      return '${e.nombre} ${e.apellido}';
+    }
   }
+  return 'Desconocido';
+}
+
+
+String obtenerNombreMateria(int id) {
+  for (final m in materias) {
+    if (m.id_materia == id) {
+      return m.nombre;
+    }
+  }
+  return 'Desconocida';
+}
+
+String obtenerTipoMulta(int id) {
+  for (final t in tipos) {
+    if (t.id_tipo == id) {
+      return t.descripcion;
+    }
+  }
+  return 'N/A';
+}
+
+
 
   void eliminarMulta(int id_multa) {
     showDialog(
@@ -42,6 +87,8 @@ class _MultaScreenState extends State<MultaScreen> {
                 Navigator.pop(context);
                 cargarMultas();
               }
+
+              
             },
             child: const Text("Si"),
           ),
@@ -68,9 +115,15 @@ class _MultaScreenState extends State<MultaScreen> {
                     final multa = multas[i];
                     return Card(
                       child: ListTile(
-                        title: Text(multa.fecha),
-                        subtitle: Text(multa.valor),
-                        leading: Text(multa.id_estudiante.toString()),
+                        title: Text(
+                          '${obtenerNombreEstudiante(multa.id_estudiante)}'
+                          ' - ${obtenerNombreMateria(multa.id_materia)}',
+                        ),
+                        subtitle: Text(
+                          '${obtenerTipoMulta(multa.id_tipo)} | '
+                          '${multa.valor} | ${multa.fecha}',
+                        ),
+
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -108,3 +161,4 @@ class _MultaScreenState extends State<MultaScreen> {
     );
   }
 }
+

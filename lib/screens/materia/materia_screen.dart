@@ -64,7 +64,7 @@ class _MateriaScreenState extends State<MateriaScreen> {
                 return Card(
                   child: ListTile(
                     title: Text(materia.nombre),
-                    subtitle: Text(materia.docente),
+                    subtitle: Text('${materia.docente} - ${materia.estado}'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
