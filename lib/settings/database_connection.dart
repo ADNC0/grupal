@@ -34,7 +34,9 @@ class DatabaseConnection {
         await db.execute('''
           CREATE TABLE estudiante (
             id_estudiante INTEGER PRIMARY KEY AUTOINCREMENT,
+            cedula TEXT,
             nombre TEXT,
+            apellido TEXT,
             curso TEXT,
             paralelo TEXT
           )

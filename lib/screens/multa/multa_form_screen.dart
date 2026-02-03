@@ -75,13 +75,28 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
           key: formKey,
           child: ListView(
             children: [
-              TextFormField(
-                controller: fechaController,
-                decoration: const InputDecoration(labelText: 'Fecha'),
-                validator: (v) => v == null || v.isEmpty ? 'Ingrese la fecha' : null,
+             TextFormField(
+              controller: fechaController,
+              readOnly: true,
+              decoration: const InputDecoration(
+                labelText: 'Fecha',
+                suffixIcon: Icon(Icons.calendar_today),
               ),
+              onTap: () async {
+                DateTime? fecha = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2025),
+                  lastDate: DateTime(2030),
+                );
+                if (fecha != null) {
+                  fechaController.text =
+                      "${fecha.day}/${fecha.month}/${fecha.year}";
+                }
+              },
+              validator: (v) => v == null || v.isEmpty ? 'Ingrese la fecha' : null,
+            ),
               const SizedBox(height: 15),
-
               TextFormField(
                 controller: valorController,
                 decoration: const InputDecoration(labelText: 'Valor'),

@@ -135,7 +135,8 @@ class HomeScreen extends StatelessWidget {
             children: [
               Text("Desarrollo de una app para las multas del curso"),
               SizedBox(height: 5),
-              Text("Evitando errores humanos"),
+              Text("Las multas se gestionan a partir del estudiante seleccionado,"),
+              Text("y se muestran mediante un filtrado de registros asociados a dicho estudiante."),
               SizedBox(height: 5),
               Text("Desarrollado por: Abraham Nacimba"),
             ],
