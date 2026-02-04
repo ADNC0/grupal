@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,11 +10,13 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 38, 170, 235),
         centerTitle: true,
         title: Column(
-          children: [
+          children: const [
             Text("BIENVENIDO", style: TextStyle(color: Colors.white)),
             SizedBox(height: 4),
-            Text("Seleccione una opción", style: TextStyle(color: Colors.white70, fontSize: 14)),
-            SizedBox(height: 4),
+            Text(
+              "Seleccione una opción",
+              style: TextStyle(color: Colors.white70, fontSize: 14),
+            ),
           ],
         ),
       ),
@@ -24,9 +24,9 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
-            Image.asset('assets/multa.png', height: 180,width: 180,),
-            SizedBox(height: 50),
+            const SizedBox(height: 20),
+            Image.asset('assets/multa.png', height: 180, width: 180),
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -39,18 +39,26 @@ class HomeScreen extends StatelessWidget {
                     height: 100,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.lightGreenAccent,
+                      color: Colors.green.shade400,
                       border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text(
-                      "ESTUDIANTE",
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.person, color: Colors.white, size: 32),
+                        SizedBox(height: 8),
+                        Text(
+                          "ESTUDIANTE",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/materia');
@@ -60,20 +68,28 @@ class HomeScreen extends StatelessWidget {
                     height: 100,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.lightBlueAccent,
+                      color: Colors.blue.shade400,
                       border: Border.all(color: Colors.blue),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text(
-                      "MATERIA",
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.book, color: Colors.white, size: 32),
+                        SizedBox(height: 8),
+                        Text(
+                          "MATERIA",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -86,18 +102,26 @@ class HomeScreen extends StatelessWidget {
                     height: 100,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.orangeAccent,
+                      color: Colors.orange.shade400,
                       border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text(
-                      "TIPO MULTA",
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.warning, color: Colors.white, size: 32),
+                        SizedBox(height: 8),
+                        Text(
+                          "TIPO MULTA",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/multa');
@@ -107,14 +131,23 @@ class HomeScreen extends StatelessWidget {
                     height: 100,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: Colors.red.shade400,
                       border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text(
-                      "MULTA",
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.attach_money,
+                            color: Colors.white, size: 32),
+                        SizedBox(height: 8),
+                        Text(
+                          "MULTA",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -123,44 +156,44 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-     floatingActionButton: FloatingActionButton(
-  onPressed: () {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Acerca de la App"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              
-              Text("Desarrollo de una app para las multas del curso"),
-              SizedBox(height: 5),
-              Text("Las multas se gestionan a partir del estudiante seleccionado,"),
-              Text("Las multas se asignan según la materia y el tipo de multa."),
-              SizedBox(height: 5),
-              Text("Desarrollado por:"),
-              Text(" Nacimba Abraham  "),
-              Text(" Alay Jonathan  "),
-              Text(" Espin Anthony  "),
-              Text(" Tipan Paul "),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text("Cerrar"),
-            ),
-          ],
-        );
-      },
-    );
-  },
-  backgroundColor: Colors.black,
-  shape: CircleBorder(),
-  child: Icon(Icons.group, color: Colors.white),
-),
-
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.group, color: Colors.white),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text("Acerca de la App"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text("Desarrollo de una app para las multas del curso"),
+                    SizedBox(height: 5),
+                    Text(
+                        "Las multas se gestionan a partir del estudiante seleccionado,"),
+                    Text(
+                        "Las multas se asignan según la materia y el tipo de multa."),
+                    SizedBox(height: 5),
+                    Text("Desarrollado por:"),
+                    Text("Nacimba Abraham"),
+                    Text("Alay Jonathan"),
+                    Text("Espin Anthony"),
+                    Text("Tipan Paul"),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Cerrar"),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
