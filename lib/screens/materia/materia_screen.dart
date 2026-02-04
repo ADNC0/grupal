@@ -91,7 +91,7 @@ class _MateriaScreenState extends State<MateriaScreen> {
           await Navigator.pushNamed(context, '/materia/form');
           cargarMateria();
         },
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.redAccent,
         shape: CircleBorder(),
         child: Icon(Icons.add, color: Colors.white),
       ),

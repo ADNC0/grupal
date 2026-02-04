@@ -71,8 +71,6 @@ String obtenerTipoMulta(int id) {
   return 'N/A';
 }
 
-
-
   void eliminarMulta(int id_multa) {
     showDialog(
       context: context,
@@ -149,7 +147,7 @@ String obtenerTipoMulta(int id) {
           await Navigator.pushNamed(context, '/multa/form');
           cargarMultas();
         },
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.deepOrangeAccent,
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white),
       ),
