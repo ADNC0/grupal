@@ -39,7 +39,7 @@ class _EstudianteFormScreenState extends State<EstudianteFormScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(esEditar ? "editar estudiante" : "insertar estudiante"),
+        title: Text(esEditar ? "Editar al Estudiante" : "Insertar al Estudiante"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

@@ -52,7 +52,7 @@ class _EstudianteScreenState extends State<EstudianteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Listado de estudiante")),
+      appBar: AppBar(title: Text("Listado de estudiantes")),
       body: cargando
           ? Center(child: CircularProgressIndicator())
           : estudiantes.isEmpty
@@ -91,7 +91,7 @@ class _EstudianteScreenState extends State<EstudianteScreen> {
           await Navigator.pushNamed(context, '/estudiante/form');
           cargarEstudiante();
         },
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blue,
         shape: CircleBorder(),
         child: Icon(Icons.add, color: Colors.white),
       ),

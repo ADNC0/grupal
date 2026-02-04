@@ -91,7 +91,7 @@ class _TipoMultaScreenState extends State<TipoMultaScreen> {
           await Navigator.pushNamed(context, '/tipo_multa/form');
           cargarTipoMulta();
         },
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.purpleAccent,
         shape: CircleBorder(),
         child: Icon(Icons.add, color: Colors.white),
       ),

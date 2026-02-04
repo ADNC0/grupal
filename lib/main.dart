@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       routes: {
         '/': (context) => HomeScreen(),
-
         '/multa': (context) => MultaScreen(),
         '/multa/form': (context) => MultaFormScreen(),
 
