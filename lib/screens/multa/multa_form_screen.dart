@@ -74,7 +74,6 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
           key: formKey,
           child: ListView(
             children: [
-              // FECHA
               TextFormField(
                 controller: fechaController,
                 readOnly: true,
@@ -99,11 +98,12 @@ class _MultaFormScreenState extends State<MultaFormScreen> {
               ),
 
               const SizedBox(height: 15),
-
-              // VALOR
               TextFormField(
                 controller: valorController,
-                decoration: const InputDecoration(labelText: 'Valor'),
+                decoration: const InputDecoration(
+                  labelText: 'Valor',
+                  suffixIcon: Icon(Icons.attach_money),
+                ),
                 validator: (v) =>
                     v == null || v.isEmpty ? 'Ingrese el valor' : null,
               ),
