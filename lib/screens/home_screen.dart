@@ -10,9 +10,13 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 38, 170, 235),
         centerTitle: true,
         title: Column(
-          children: const [
-            Text("BIENVENIDO", style: TextStyle(color: Colors.white)),
-            SizedBox(height: 4),
+          children: [
+            const SizedBox(height: 10),
+            Text(
+              "PASA LO QUE TIENES",style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 4),
             Text(
               "Seleccione una opción",
               style: TextStyle(color: Colors.white70, fontSize: 14),
