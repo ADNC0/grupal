@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: const Color.fromARGB(255, 38, 170, 235),
         centerTitle: true,
         title: Column(
           children: [
@@ -15,11 +17,6 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 4),
             Text("Seleccione una opción", style: TextStyle(color: Colors.white70, fontSize: 14)),
             SizedBox(height: 4),
-            Container(
-              height: 2,
-              color: Colors.blueAccent,
-              width: 150,
-            ),
           ],
         ),
       ),
@@ -27,6 +24,9 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 20),
+            Image.asset('assets/multa.png', height: 180,width: 180,),
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -133,6 +133,7 @@ class HomeScreen extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              
               Text("Desarrollo de una app para las multas del curso"),
               SizedBox(height: 5),
               Text("Las multas se gestionan a partir del estudiante seleccionado,"),
