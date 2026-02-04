@@ -115,13 +115,8 @@ String obtenerTipoMulta(int id) {
                     final multa = multas[i];
                     return Card(
                       child: ListTile(
-                        title: Text(
-                          '${obtenerNombreEstudiante(multa.id_estudiante)}'
-                          ' - ${obtenerNombreMateria(multa.id_materia)}',
-                        ),
-                        subtitle: Text(
-                          '${obtenerTipoMulta(multa.id_tipo)} | '
-                          '${multa.valor} | ${multa.fecha}',
+                        title: Text('${obtenerNombreEstudiante(multa.id_estudiante)} - ${obtenerNombreMateria(multa.id_materia)}'),
+                        subtitle: Text('${obtenerTipoMulta(multa.id_tipo)} | ''${multa.valor} | ${multa.fecha}',
                         ),
 
                         trailing: Row(
